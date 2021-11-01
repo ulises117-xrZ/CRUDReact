@@ -89,6 +89,7 @@ function App() {
   return (
     <div className="container m-5">
       <h1 className="text-center">Crud Simple with ReactJS</h1>
+      <h2 className="text-center">Made by Ulises Cruz</h2>
       <hr />
       <div className="row">
         <div className="col-12">
