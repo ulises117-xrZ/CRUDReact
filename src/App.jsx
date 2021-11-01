@@ -12,7 +12,7 @@ function App() {
   const agregarTareas = (e) => {
     e.preventDefault();
     if (!tarea.trim()) {
-      setError("Ingrese un valor para agregar la tarea");
+      setError("No data");
       return;
     }
     setTareas([
@@ -73,7 +73,7 @@ function App() {
     e.preventDefault();
     setIdEdited(true);
     if (!tarea.trim()) {
-      setError("Llene el campo editado porfavor");
+      setError("No data");
       return;
     }
 
@@ -94,7 +94,7 @@ function App() {
       <div className="row">
         <div className="col-12">
           <h4 className="text-center">
-            {editionMode ? "Edite la tarea" : "Formulario"}
+            {editionMode ? "Edit" : "Add"}
           </h4>
           {error ? <span className="text-danger">{error}</span> : null}
           <form
@@ -107,17 +107,17 @@ function App() {
             <input
               type="text"
               className="form-control mb-2"
-              placeholder="agrega tarea"
+              placeholder="add a task"
               onChange={(e) => setTarea(e.target.value)}
               value={tarea}
             />
             {editionMode ? (
               <button className="btn btn-warning btn-block" type="submit">
-                Editar
+                Edit
               </button>
             ) : (
               <button className="btn btn-dark btn-block" type="submit">
-                Agregar
+                Add
               </button>
             )}
           </form>
@@ -137,10 +137,10 @@ function App() {
           </button>
         </div>
         <div className="col-6">
-          <h4 className="text-center">Lista de tareas</h4>
+          <h4 className="text-center">Tasks</h4>
           <ul className="list-group">
             {tareas.length === 0 ? (
-              <li className="list-group-item">Sin tareas</li>
+              <li className="list-group-item">Without tasks</li>
             ) : (
               tareas.map((item) => {
                 return (
@@ -150,19 +150,19 @@ function App() {
                       className="btn btn-danger float-right mx-2"
                       onClick={() => handleDeleteTask(item.id)}
                     >
-                      Eliminar
+                      Delete
                     </button>
                     <button
                       className="btn btn-warning  float-right mx-2"
                       onClick={() => editTask(item)}
                     >
-                      Editar
+                      Edit
                     </button>
                     <button
                       className="btn btn-success  float-right mx-2"
                       onClick={() => completarTarea(item)}
                     >
-                      Completar
+                      Complete
                     </button>
                   </li>
                 );
@@ -171,10 +171,10 @@ function App() {
           </ul>
         </div>
         <div className="col-6">
-          <h4 className="text-center">Tareas completadas</h4>
+          <h4 className="text-center">Completed tasks</h4>
           <ul className="list-group">
             {tareasCompletadas.length === 0 ? (
-              <li className="list-group-item">Sin tareas completadas</li>
+              <li className="list-group-item">without completed tasks</li>
             ) : (
               tareasCompletadas.map((item) => {
                 return (
@@ -184,7 +184,7 @@ function App() {
                       className="btn btn-danger float-right mx-2"
                       onClick={() => handleDeleteCompleted(item.id)}
                     >
-                      Eliminar
+                      Delete
                     </button>
                   </li>
                 );
