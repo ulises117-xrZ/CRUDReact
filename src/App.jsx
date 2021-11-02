@@ -44,11 +44,16 @@ function App() {
     handleDeleteTask(item.id);
   };
 
-  const handleCompleteAll = ()=>{
-    const arrayCompletado = tareas.map(item => item);
-    setTareascompletadas(arrayCompletado);
-    setTareas([])
-  }
+  const handleCompleteAll = () => {
+    if (tareas.length === 0) {
+      return;
+    }
+
+    const arrayCompletado = tareas.map((item) => item);
+
+    setTareascompletadas([...tareasCompletadas , ...arrayCompletado]);
+    setTareas([]);
+  };
   //eliminar tarea completada
   const handleDeleteCompleted = (id) => {
     const arrayEliminadoComp = tareasCompletadas.filter(
@@ -93,9 +98,7 @@ function App() {
       <hr />
       <div className="row">
         <div className="col-12">
-          <h4 className="text-center">
-            {editionMode ? "Edit" : "Add"}
-          </h4>
+          <h4 className="text-center">{editionMode ? "Edit" : "Add"}</h4>
           {error ? <span className="text-danger">{error}</span> : null}
           <form
             onSubmit={
@@ -121,20 +124,23 @@ function App() {
               </button>
             )}
           </form>
-          <button
-            className="btn btn-danger mt-2 mr-5 btn-block col-4"
-            onClick={(e) => handleDeleteAll()}
-          >
-            {" "}
-            Delete all
-          </button>
-          <button
-            className="btn btn-success mt-2 mb-5 btn-block col-4"
-            onClick={(e) => handleCompleteAll()}
-          >
-            {" "}
-            Complete all
-          </button>
+
+          {editionMode ? null : (
+            <>
+              <button
+                className="btn btn-danger mt-2 mr-5 btn-block col-4"
+                onClick={(e) => handleDeleteAll()}
+              >
+                Delete all
+              </button>
+              <button
+                className="btn btn-success mt-2 mb-5 btn-block col-4"
+                onClick={(e) => handleCompleteAll()}
+              >
+                Complete all
+              </button>
+            </>
+          )}
         </div>
         <div className="col-6">
           <h4 className="text-center">Tasks</h4>
@@ -146,31 +152,35 @@ function App() {
                 return (
                   <li className="list-group-item" key={item.id}>
                     <span className="lead">{item.nameTarea}</span>
-                    <button
-                      className="btn btn-danger float-right mx-2"
-                      onClick={() => handleDeleteTask(item.id)}
-                    >
-                      Delete
-                    </button>
-                    <button
-                      className="btn btn-warning  float-right mx-2"
-                      onClick={() => editTask(item)}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className="btn btn-success  float-right mx-2"
-                      onClick={() => completarTarea(item)}
-                    >
-                      Complete
-                    </button>
+                    {editionMode ? null : (
+                      <>
+                        <button
+                          className="btn btn-danger float-right mx-2"
+                          onClick={() => handleDeleteTask(item.id)}
+                        >
+                          Delete
+                        </button>
+                        <button
+                          className="btn btn-warning  float-right mx-2"
+                          onClick={() => editTask(item)}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="btn btn-success  float-right mx-2"
+                          onClick={() => completarTarea(item)}
+                        >
+                          Complete
+                        </button>
+                      </>
+                    )}
                   </li>
                 );
               })
             )}
           </ul>
         </div>
-        <div className="col-6">
+        <div className="col-6 col-sm">
           <h4 className="text-center">Completed tasks</h4>
           <ul className="list-group">
             {tareasCompletadas.length === 0 ? (
