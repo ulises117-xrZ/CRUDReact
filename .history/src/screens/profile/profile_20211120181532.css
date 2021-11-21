@@ -1,0 +1,8 @@
+
+.svgImage{
+    width: 200px;
+    height: 200px;
+    background: #23f;
+    background-image: url("./wave.svg");
+    background-repeat: no-repeat;
+}

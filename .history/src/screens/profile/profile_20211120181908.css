@@ -1,0 +1,11 @@
+.contenedor{
+    width: 100%;
+    background: #000;
+}
+
+.svgImage{
+    height: 200px;
+    /* background: #23f; */
+    background-image: url("./wave.svg");
+    background-repeat: no-repeat;
+}
