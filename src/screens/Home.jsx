@@ -1,20 +1,11 @@
 import React from "react";
 
-
 import app from "../firebase/firebase";
 import Crud from "../components/crud-form/Crud";
-import {
-  getFirestore,
-  doc,
-  updateDoc,
-  
-} from "firebase/firestore";
-import {CgLogOut} from 'react-icons/cg';
-import { Button } from "react-bootstrap";
+import { getFirestore, doc, updateDoc } from "firebase/firestore";
+
 import { useAuth } from "../Context/authProvider";
 const db = getFirestore(app);
-
-
 
 export default function Home() {
   const authContext = useAuth();
@@ -25,26 +16,9 @@ export default function Home() {
     });
   };
 
-
   return (
-
-    <div className="container">
-      <Crud
-        deleteData={deleteData}
-      />
-      <Button
-      className="mt-4 mb-4"
-        variant="warning"
-        type="submit"
-        onClick={() => {
-          authContext.logOut();
-        }}
-      >
-      <CgLogOut />
-        Logout
-      </Button>
-
+    <div className="container mt-5">
+      <Crud deleteData={deleteData} />
     </div>
-
   );
 }
